@@ -3,14 +3,14 @@
 
 #include "config.h"
 #include "imu_reader.h"
-#include "lidar_reader.h"
+#include <LD06_LiDAR.h>
 #include "web_viewer.h"
 
 namespace
 {
 
 HardwareSerial &lidarSerial = Serial1;
-lidar::Reader lidar_reader(lidarSerial);
+LD06_LiDAR lidar_reader(lidarSerial);
 WebViewer web_viewer(lidar_reader);
 #if IMU_TYPE == IMU_BNO085
 imu::Bno085Reader imu_reader;
@@ -32,7 +32,7 @@ void print_json_status(const char *stage, const char *detail)
   Serial.println(F("\"}"));
 }
 
-void print_json_scan(const lidar::ScanFrame &scan)
+void print_json_scan(const LD06ScanFrame &scan)
 {
   Serial.print(F("{\"t\":\"scan\",\"x\":["));
   bool first = true;
@@ -97,7 +97,7 @@ void print_json_heartbeat()
   Serial.print(F("{\"t\":\"status\",\"stage\":\"heartbeat\",\"detail\":\"uptime_ms="));
   Serial.print(millis());
   Serial.print(F(",packets="));
-  Serial.print(lidar_reader.packets_seen());
+  Serial.print(lidar_reader.packetsSeen());
   Serial.print(F(",imu="));
   Serial.print(imu_present ? F("1") : F("0"));
   Serial.println(F("\"}"));
@@ -139,7 +139,7 @@ void setup()
     print_json_status("imu", "not_found");
   }
 
-  lidar_reader.begin(config::kLd06RxPin, config::kLd06TxPin, config::kLd06Baud);
+  lidar_reader.begin(config::kLd06Baud, config::kLd06RxPin, config::kLd06TxPin);
 
   print_json_status("startup", "wifi_connecting");
   web_viewer.begin(); // may block up to 15 s for WiFi
@@ -148,8 +148,8 @@ void setup()
 
 void loop()
 {
-  if (lidar_reader.read_scan())
-    print_json_scan(lidar_reader.latest_scan());
+  if (lidar_reader.update())
+    print_json_scan(lidar_reader.latestScan());
 
   if (imu_present)
   {

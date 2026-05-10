@@ -1,7 +1,6 @@
 #include "web_viewer.h"
 
 #include "config.h"
-#include "lidar_data.h"
 
 namespace
 {
@@ -223,7 +222,7 @@ constexpr char kViewerPage[] PROGMEM = R"HTML(
 
 } // namespace
 
-WebViewer::WebViewer(lidar::Reader &reader) : reader_(reader)
+WebViewer::WebViewer(LD06_LiDAR &reader) : reader_(reader)
 {
 }
 
@@ -234,11 +233,11 @@ void WebViewer::handle_root()
 
 void WebViewer::handle_scan_json()
 {
-  const lidar::ScanFrame &scan = reader_.latest_scan();
+  const LD06ScanFrame &scan = reader_.latestScan();
   String body;
   body.reserve(256 + (static_cast<size_t>(scan.point_count) * 88));
   body += F("{\"packets\":");
-  body += reader_.packets_seen();
+  body += reader_.packetsSeen();
   body += F(",\"speed\":");
   body += scan.speed_raw;
   body += F(",\"point_count\":");
@@ -250,7 +249,7 @@ void WebViewer::handle_scan_json()
   body += F(",\"crc_fail_count\":");
   body += scan.crc_fail_count;
   body += F(",\"max_range\":");
-  body += lidar::kMaxDisplayDistanceMm;
+  body += kLD06MaxDisplayDistanceMm;
   body += F(",\"points\":[");
 
   for (uint16_t i = 0; i < scan.point_count; ++i)
@@ -260,7 +259,7 @@ void WebViewer::handle_scan_json()
       body += ',';
     }
 
-    const lidar::ScanPoint &point = scan.points[i];
+    const LD06ScanPoint &point = scan.points[i];
     body += F("{\"angle\":");
     body += String(point.angle_deg, 2);
     body += F(",\"distance\":");
