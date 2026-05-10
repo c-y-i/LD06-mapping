@@ -7,8 +7,7 @@ Robot-control suite — two PlatformIO firmware projects (ESP32) and host-side t
 ```text
 rover_stack/
 ├── controller/     USB bridge: PC serial <-> ESP-NOW <-> bot
-├── bot/            robot firmware: motors + LD06 + BNO085 + telemetry
-└── py/             compatibility launchers for host tools
+└── bot/            robot firmware: motors + LD06 + BNO085 + telemetry
 ```
 
 ## Data Flow
@@ -46,7 +45,7 @@ Update `kBotMac` in `controller/src/main.cpp` to match your bot board's MAC addr
 
 ## Host Tools
 
-Canonical host tools now live in `py_scripts/rover_tools/`.
+Host tools live in the repo-level `py_scripts/rover_tools/` package.
 
 One-time setup:
 
@@ -96,4 +95,4 @@ python -m rover_tools.replay --file run1.jsonl [--web-port 8080] [--speed 2.0]
 
 Feeds the recording through the full SLAM stack without any hardware. Keeps the viser viewer alive after replay ends for map inspection.
 
-Legacy commands from `rover_stack/py/` still work via compatibility wrappers.
+Run host tools from `../py_scripts`.

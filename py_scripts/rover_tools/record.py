@@ -8,9 +8,6 @@ being written.  The file can then be fed into replay.py.
 Usage:
     python -m rover_tools.record --port /dev/ttyACM0 [--baud 460800] [--output recording.jsonl]
 
-Compatibility launcher:
-    python rover_stack/py/record.py ...
-
 If --output is omitted, the file is named recording_<unix_timestamp>.jsonl in
 the current directory.
 """

@@ -35,6 +35,7 @@ python -m rover_tools.controller_teleop --port /dev/ttyACM0 --baud 460800 --web-
 python -m rover_tools.record --port /dev/ttyACM0 --output run1.jsonl
 python -m rover_tools.replay --file run1.jsonl --speed 2.0
 
-# VL53L5CX viewer (from VL53L5CX_tof/ via convenience script)
+# VL53L5CX viewer convenience script
+cd ../VL53L5CX_tof
 ./scripts/run_viewer.sh --port /dev/ttyACM0
 ```

@@ -8,9 +8,6 @@ SlamThread, and displays the evolving map in the viser web viewer.
 Usage:
     python -m rover_tools.replay --file recording.jsonl [--web-port 8080] [--speed 1.0]
 
-Compatibility launcher:
-    python rover_stack/py/replay.py ...
-
     --speed 1.0   real-time
     --speed 2.0   2× faster
     --speed 0     as fast as possible (no sleep — good for quick map builds)

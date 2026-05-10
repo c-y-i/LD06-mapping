@@ -37,5 +37,3 @@ python -m rover_tools.replay --file run1.jsonl --speed 2.0
 ```
 
 Open `http://localhost:8080` for the web viewer.
-
-Legacy launchers are kept at `rover_stack/py/*.py` for backward compatibility.

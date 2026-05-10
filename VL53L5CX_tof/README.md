@@ -49,8 +49,9 @@ Or manually:
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r viewer/requirements.txt
-python -m viewer --port /dev/ttyACM0
+pip install -r ../py_scripts/requirements.txt
+cd ../py_scripts
+python -m sensor_viewers.vl53l5cx_viewer --port /dev/ttyACM0
 ```
 
 ## Viewer Controls
@@ -77,4 +78,4 @@ Live status panel shows I2C scan result, ToF/IMU connected state, FPS, and dista
 ## Notes
 
 - Shared viewer code: [../py_scripts/sensor_viewers/vl53l5cx_viewer/](../py_scripts/sensor_viewers/vl53l5cx_viewer/)
-- `viewer/` folder here is a thin wrapper entrypoint only — edit the shared package for real changes
+- `scripts/run_viewer.sh` is only a convenience launcher; the viewer package lives in `py_scripts/`.

@@ -4,6 +4,7 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 REPO_ROOT="$(cd "${SCRIPT_DIR}/.." && pwd)"
+WORKSPACE_ROOT="$(cd "${REPO_ROOT}/.." && pwd)"
 VENV_DIR="${REPO_ROOT}/.venv"
 
 if ! command -v python3 >/dev/null 2>&1; then
@@ -24,7 +25,7 @@ else
 fi
 
 "${VENV_DIR}/bin/python" -m pip install --upgrade pip
-"${VENV_DIR}/bin/python" -m pip install -r "${REPO_ROOT}/viewer/requirements.txt"
+"${VENV_DIR}/bin/python" -m pip install -r "${WORKSPACE_ROOT}/py_scripts/requirements.txt"
 
 echo
 echo "Viewer environment is ready."
