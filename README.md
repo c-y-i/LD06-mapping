@@ -1,14 +1,12 @@
 # LD06 Mapping
 
-LD06 Mapping is a LiDAR mapping workspace built around the LD06 2D LiDAR. It includes a reusable Arduino/PlatformIO LD06 library, ESP32 firmware for streaming scan data, host-side Python viewers and rover tools, and a pure-Python 2D SLAM simulator.
-
-The rover pieces are still real subsystems in this workspace; `rover_stack/` keeps its existing name and firmware role.
+LD06 Mapping is a LiDAR mapping workspace built around the LD06 2D LiDAR. It includes an Arduino/PlatformIO LD06 library and an ESP32 firmware demo for streaming scan data.
 
 ## What's Here
 
 | Folder | Description |
 |---|---|
-| [LD06_LiDAR/](LD06_LiDAR/) | Reusable Arduino/PlatformIO library for LD06 packet parsing and scan assembly |
+| [LD06_LiDAR/](LD06_LiDAR/) | Arduino/PlatformIO library for LD06 packet parsing and scan assembly |
 | [LD06_Demo/](LD06_Demo/) | ESP32 PlatformIO firmware demo that uses `LD06_LiDAR`, streams JSON over serial, and serves an optional web viewer |
 | [slam/](slam/) | Pure-Python 2D SLAM package and hardware-free simulator (`slam/sim.py`) |
 | [py_scripts/](py_scripts/) | Shared host-side Python workspace for sensor viewers and rover tools |
@@ -17,7 +15,7 @@ The rover pieces are still real subsystems in this workspace; `rover_stack/` kee
 
 ## Use The LD06 Library
 
-The reusable library is in [LD06_LiDAR/](LD06_LiDAR/). The installable package name is `LD06_LiDAR`, and sketches include the same public header:
+The library is in [LD06_LiDAR/](LD06_LiDAR/). The installable package name is `LD06_LiDAR`, and sketches include the same public header:
 
 ```cpp
 #include <LD06_LiDAR.h>
@@ -76,7 +74,7 @@ platformio run --target upload
 platformio device monitor --baud 460800
 ```
 
-The firmware reads LD06 UART packets through the reusable `LD06_LiDAR` library, emits newline-delimited JSON scan messages, optionally reads IMU data, and can serve a browser viewer from the ESP32.
+The firmware reads LD06 UART packets through the `LD06_LiDAR` library, emits newline-delimited JSON scan messages, optionally reads IMU data, and can serve a browser viewer from the ESP32.
 
 ## Run With The Rover
 

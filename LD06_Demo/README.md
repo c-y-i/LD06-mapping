@@ -1,6 +1,6 @@
 # LD06 Demo Firmware
 
-This is an ESP32 firmware/demo app for the reusable [LD06_LiDAR](../LD06_LiDAR/) library. It reads LD06 scan frames, streams newline-delimited JSON over serial, optionally reads IMU data, and can serve a lightweight browser viewer directly from the ESP32.
+This is an ESP32 firmware/demo app for the [LD06_LiDAR](../LD06_LiDAR/) library. It reads LD06 scan frames, streams newline-delimited JSON over serial, optionally reads IMU data, and can serve a lightweight browser viewer directly from the ESP32.
 
 Firmware runs on an Adafruit Feather ESP32 v2. The desktop viewer is a Python app using viser, shared in [../py_scripts/](../py_scripts/).
 
